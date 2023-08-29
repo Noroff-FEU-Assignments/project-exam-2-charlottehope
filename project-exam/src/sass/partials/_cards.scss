@@ -1,0 +1,71 @@
+.card {
+  margin: 20px 30px;
+  --bs-border-style: none;
+  border-radius: 20px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+.card-feedback {
+  color: rgba(0, 51, 56, 0.5);
+}
+.card-description {
+  margin: 10px 0px;
+}
+.card h4 {
+  color: #088b96;
+}
+.card h5 {
+  margin-top: 25px;
+}
+
+// HOME
+.login-card,
+.register-card {
+  color: #7f989b;
+  width: 325px;
+  text-align: center;
+}
+.login-card {
+  height: 375px;
+}
+.register-card {
+  height: 425px;
+}
+.login-card img,
+.register-card img {
+  max-width: 250px;
+  height: 70px;
+  margin: 40px 0px 19px 0px;
+}
+.register-disclaimer {
+  max-width: 355px;
+}
+
+// FEED & POST
+.post-card img {
+  border-radius: 10px;
+}
+.post-feedback h5 {
+  color: #088b96;
+}
+
+// PROFILES
+.profile-card {
+  padding: 10px;
+  margin: 0 auto;
+  max-width: 350px;
+  text-align: center;
+  margin-top: -100px;
+  margin-bottom: 30px;
+}
+.profile-card h2 {
+  color: #088b96;
+}
+.profile h3 {
+  text-align: center;
+}
+.avatar-photo {
+  margin-top: 10px;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}

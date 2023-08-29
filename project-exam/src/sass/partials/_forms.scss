@@ -1,0 +1,27 @@
+.post-form {
+  margin: 20px 30px;
+}
+.post-form h3 {
+  color: #09aab7;
+}
+.post-form .form-control {
+  margin: 5px 0;
+  --bs-border-style: none;
+  border-radius: 10px;
+}
+.post-form button {
+  margin-top: 10px;
+  width: 100%;
+}
+.add-comment {
+  margin-top: 10px;
+}
+.edit-post {
+  margin: 30px 0px;
+}
+.delete-post {
+  margin: 0px 10px;
+}
+.update-success {
+  margin-top: 20px;
+}

@@ -1,0 +1,23 @@
+body {
+  margin: 0px;
+  color: #003338;
+  background-color: #f8feff;
+}
+.container {
+  max-width: 600px;
+}
+// PROFILES
+.banner-photo {
+  min-width: 100%;
+  object-fit: cover;
+  max-height: 250px;
+  border-radius: 20px;
+}
+.profile-photos {
+  margin: 15px 0px;
+}
+
+// BREADCRUMBS
+.breadcrumb {
+  margin-top: 15px;
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 31.28 25.81">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2ec0d1;
+        font-family: Montserrat-Bold, Montserrat;
+        font-size: 12px;
+      }
+
+      .cls-2 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-3 {
+        stroke-width: .75px;
+      }
+
+      .cls-3, .cls-4 {
+        fill: none;
+        stroke: #2ec0d1;
+        stroke-miterlimit: 10;
+      }
+    </style>
+    <symbol id="New_Symbol_8" data-name="New Symbol 8" viewBox="0 0 16.92 13.96">
+      <g>
+        <text class="cls-1" transform="translate(0 10.2)"><tspan class="cls-2" x="0" y="0">k</tspan><tspan x="7.64" y="0">o</tspan></text>
+        <path class="cls-4" d="M16.81,12.72c-7.07,1.64-10.45-3.54-10.45-3.54"/>
+        <path class="cls-3" d="M16.76,12.88s-6.64,2.95-11.02-3.22"/>
+      </g>
+    </symbol>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <use width="16.92" height="13.96" transform="scale(1.85)" xlink:href="#New_Symbol_8"/>
+  </g>
+</svg>
