@@ -5,29 +5,21 @@ const EditPost = ({ post, onUpdate }) => {
   const [editedPost, setEditedPost] = useState(post);
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
-  const handleStartEditing = () => {
-    setEditing(true);
-  };
-
   const handleUpdate = () => {
     onUpdate(editedPost);
     setEditing(false);
     setUpdateSuccess(true);
-    setTimeout(() => {
-      setUpdateSuccess(false);
-    }, 2000);
+    setTimeout(() => setUpdateSuccess(false), 2000);
   };
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setEditedPost((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleInputChange = ({ target: { name, value } }) => {
+    setEditedPost((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleCancel = () => {
-    setEditing(false);
+  const placeholders = {
+    title: "Title",
+    body: "Description",
+    media: "Image URL",
   };
 
   return (
@@ -41,62 +33,40 @@ const EditPost = ({ post, onUpdate }) => {
               handleUpdate();
             }}
           >
-            <div className="form-group">
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                className="form-control"
-                id="title"
-                name="title"
-                value={editedPost.title}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="body">Description</label>
-              <textarea
-                className="form-control"
-                id="body"
-                name="body"
-                value={editedPost.body}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="media">Image URL</label>
-              <input
-                type="text"
-                className="form-control"
-                id="media"
-                name="media"
-                value={editedPost.media}
-                onChange={handleInputChange}
-              />
-            </div>
+            {["title", "body", "media"].map((field) => (
+              <div className="form-group" key={field}>
+                <label htmlFor={field}>{placeholders[field]}</label>
+                <input
+                  type={field === "body" ? "textarea" : "text"}
+                  className="form-control"
+                  id={field}
+                  name={field}
+                  value={editedPost[field]}
+                  onChange={handleInputChange}
+                  placeholder={placeholders[field]}
+                />
+              </div>
+            ))}
             <button type="submit" className="btn btn-primary edit-button">
               Update
             </button>
             <button
               type="button"
               className="btn btn-secondary edit-button"
-              onClick={handleCancel}
+              onClick={() => setEditing(false)}
             >
               Cancel
             </button>
           </form>
         </div>
       ) : (
-        <div>
-          <button className="btn btn-secondary" onClick={handleStartEditing}>
-            Edit post
-          </button>
-        </div>
+        <button className="btn btn-secondary" onClick={() => setEditing(true)}>
+          Edit post
+        </button>
       )}
-      <div>
-        {updateSuccess && (
-          <h4 className="update-success">Post updated successfully!</h4>
-        )}
-      </div>
+      {updateSuccess && (
+        <h4 className="update-success">Post updated successfully!</h4>
+      )}
     </div>
   );
 };

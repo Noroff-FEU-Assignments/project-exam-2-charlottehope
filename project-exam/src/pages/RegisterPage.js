@@ -14,21 +14,14 @@ const RegisterPage = () => {
     document.title = "konnected | Register";
   }, []);
 
-  const handleRegister = async (event) => {
-    event.preventDefault();
-
-    const userData = {
-      name,
-      email,
-      password,
-    };
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const userData = { name, email, password };
 
     try {
       const response = await fetch("/social/auth/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
       });
 
@@ -36,19 +29,17 @@ const RegisterPage = () => {
         setSuccessMessage(
           "Registered successfully. Redirecting to login page..."
         );
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
+        setTimeout(() => navigate("/login"), 2000);
       } else {
         const data = await response.json();
-        console.error("Error during registration:", data.errors[0].message);
         setErrorMessage("Error during registration. Try again.");
+        console.error("Error during registration:", data.errors[0].message);
       }
     } catch (error) {
-      console.error("Error occurred during registration:", error);
       setErrorMessage(
         `An error occurred during registration: ${error.message}`
       );
+      console.error("Error occurred during registration:", error);
     }
   };
 
@@ -60,13 +51,11 @@ const RegisterPage = () => {
           alt="konnected logo - Eastern Blue"
           className="card-img-top mx-auto"
         />
-
         <div className="card-body">
           <form onSubmit={handleRegister}>
             <div className="mb-3">
               <input
                 type="text"
-                id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="form-control"
@@ -76,7 +65,6 @@ const RegisterPage = () => {
             <div className="mb-3">
               <input
                 type="email"
-                id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="form-control"
@@ -86,7 +74,6 @@ const RegisterPage = () => {
             <div className="mb-3">
               <input
                 type="password"
-                id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="form-control"

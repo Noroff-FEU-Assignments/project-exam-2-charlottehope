@@ -36,7 +36,6 @@ const HomePage = () => {
   return (
     <div className="container">
       <PostForm onPostSubmit={handlePostSubmit} />
-
       <div className="card-deck">
         {Array.isArray(posts) &&
           posts.map((post) => (

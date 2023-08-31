@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import useProfiles from "../hooks/useProfiles";
 import { useParams, useNavigate } from "react-router-dom";
+import useProfiles from "../hooks/useProfiles";
 import PostCard from "../components/posts/PostCard";
 import Breadcrumbs from "../components/Breadcrumbs";
 import HandleBrokenBanner, {
@@ -11,7 +11,6 @@ import HandleBrokenAvatar, {
 } from "../components/images/HandleBrokenAvatar";
 
 const ProfilePage = () => {
-  const navigate = useNavigate();
   const {
     profile,
     loading,
@@ -22,54 +21,44 @@ const ProfilePage = () => {
     checkFollowingStatus,
     setIsFollowing,
   } = useProfiles();
-
+  const navigate = useNavigate();
   const { name } = useParams();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    document.title = `konnected | ${name}'s profile`;
+    const title = `konnected | ${name}'s profile`;
+    document.title = title;
     fetchProfile(name);
-    fetchPosts(name);
 
     const followingProfiles = JSON.parse(
       localStorage.getItem("followingProfiles") || "[]"
     );
-    const isUserFollowing = followingProfiles.includes(name);
+    setIsFollowing(followingProfiles.includes(name));
 
-    setIsFollowing(isUserFollowing);
-
+    fetchPosts(name);
     checkFollowingStatus(name);
   }, [name, fetchProfile, checkFollowingStatus, setIsFollowing]);
 
-  const fetchPosts = async (name) => {
+  const fetchPosts = async (profileName) => {
     try {
-      const response = await fetch(`/social/profiles/${name}/posts`, {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
+      const token = sessionStorage.getItem("accessToken");
+      const response = await fetch(`/social/profiles/${profileName}/posts`, {
+        headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch posts");
-      }
+      if (!response.ok) throw new Error("Failed to fetch posts");
 
-      const data = await response.json();
-      setPosts(data);
+      setPosts(await response.json());
     } catch (error) {
       console.error("Error fetching posts:", error);
       setPosts([]);
     }
   };
 
-  if (loading || profile === null) {
-    return <p>Loading...</p>;
-  }
+  const handleFollowClick = () =>
+    isFollowing ? unfollowProfile(name) : followProfile(name);
 
-  const handlePostClick = (postId) => {
-    navigate(`/posts/${postId}`, {
-      state: { fromTitle: `${name}'s profile` },
-    });
-  };
+  if (loading || !profile) return <p>Loading...</p>;
 
   return (
     <div className="container mt-4 profile">
@@ -95,19 +84,14 @@ const ProfilePage = () => {
             <h5>{profile.email}</h5>
             <button
               className={`btn ${isFollowing ? "btn-secondary" : "btn-primary"}`}
-              onClick={
-                isFollowing
-                  ? () => unfollowProfile(name)
-                  : () => followProfile(name)
-              }
+              onClick={handleFollowClick}
             >
               {isFollowing ? "Unfollow" : "Follow"}
             </button>
           </div>
         </div>
       </div>
-
-      {Array.isArray(posts) && posts.length > 0 ? (
+      {posts.length ? (
         <>
           <h3>Posts by {name}</h3>
           <div className="card-deck">
@@ -115,7 +99,11 @@ const ProfilePage = () => {
               <PostCard
                 key={post.id}
                 post={post}
-                onPostClick={handlePostClick}
+                onPostClick={() =>
+                  navigate(`/posts/${post.id}`, {
+                    state: { fromTitle: `${name}'s profile` },
+                  })
+                }
               />
             ))}
           </div>

@@ -1,4 +1,3 @@
-// usePost.js
 import { useState, useEffect } from "react";
 
 const usePost = (id) => {
@@ -25,12 +24,13 @@ const usePost = (id) => {
           }
         );
         const data = await response.json();
+
         setPost(data);
         setReactions(data.reactions);
         setComments(data.comments);
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching post:", error);
+      } finally {
         setIsLoading(false);
       }
     };

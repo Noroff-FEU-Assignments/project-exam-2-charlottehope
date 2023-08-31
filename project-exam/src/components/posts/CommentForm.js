@@ -3,9 +3,7 @@ import React, { useState } from "react";
 const CommentForm = ({ onSubmit }) => {
   const [commentText, setCommentText] = useState("");
 
-  const handleCommentChange = (e) => {
-    setCommentText(e.target.value);
-  };
+  const handleCommentChange = (e) => setCommentText(e.target.value);
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();

@@ -10,37 +10,34 @@ const Reactions = ({
   handleOptionalReact,
   isPickerVisible,
   setPickerVisible,
-}) => (
-  <div className="d-flex reactions">
-    {reactions.map((reaction) => (
-      <button
-        key={reaction.symbol}
-        onClick={() => handleReact(reaction.symbol)}
-        disabled={clickedSymbols.some(
-          (click) => click.symbol === reaction.symbol && click.id === id
+}) => {
+  const isClicked = (symbol) =>
+    clickedSymbols.some((click) => click.symbol === symbol && click.id === id);
+
+  return (
+    <div className="d-flex reactions">
+      {reactions.map(({ symbol, count }) => (
+        <button
+          key={symbol}
+          onClick={() => handleReact(symbol)}
+          disabled={isClicked(symbol)}
+          className={isClicked(symbol) ? "clicked" : ""}
+        >
+          {symbol} {count}
+        </button>
+      ))}
+
+      <div className="optional-emoji-container">
+        <button onClick={() => setPickerVisible(!isPickerVisible)}>
+          {isPickerVisible ? "x" : "+"}
+        </button>
+
+        {isPickerVisible && (
+          <Picker data={data} onEmojiSelect={handleOptionalReact} />
         )}
-        className={
-          clickedSymbols.some(
-            (click) => click.symbol === reaction.symbol && click.id === id
-          )
-            ? "clicked"
-            : ""
-        }
-      >
-        {reaction.symbol} {reaction.count}
-      </button>
-    ))}
-
-    <div className="optional-emoji-container">
-      <button onClick={() => setPickerVisible(!isPickerVisible)}>
-        {isPickerVisible ? "x" : "+"}
-      </button>
-
-      {isPickerVisible && (
-        <Picker data={data} onEmojiSelect={handleOptionalReact} />
-      )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Reactions;

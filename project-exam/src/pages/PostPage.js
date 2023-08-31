@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import CommentList from "../components/posts/CommentList";
 import CommentForm from "../components/posts/CommentForm";
 import Reactions from "../components/posts/Reactions";
@@ -7,7 +7,6 @@ import usePost from "../hooks/usePost";
 import Breadcrumbs from "../components/Breadcrumbs";
 import EditPost from "../components/posts/EditPost";
 import DeletePost from "../components/posts/DeletePost";
-import { Link } from "react-router-dom";
 
 const PostPage = () => {
   const { id } = useParams();
@@ -25,66 +24,36 @@ const PostPage = () => {
   const [isPickerVisible, setPickerVisible] = useState(false);
 
   useEffect(() => {
-    if (post) {
+    if (post)
       document.title = `konnected | ${post.title} | post by ${post.author.name}`;
-    }
-    const storedClickedSymbols = JSON.parse(
-      localStorage.getItem("clickedSymbols")
-    );
-    if (storedClickedSymbols) {
-      setClickedSymbols(storedClickedSymbols);
-    }
+    const storedSymbols = JSON.parse(localStorage.getItem("clickedSymbols"));
+    if (storedSymbols) setClickedSymbols(storedSymbols);
   }, [post]);
 
   useEffect(() => {
     localStorage.setItem("clickedSymbols", JSON.stringify(clickedSymbols));
   }, [clickedSymbols]);
 
+  const makeRequest = async (url, options) => {
+    const token = sessionStorage.getItem("accessToken");
+    if (!token) {
+      window.location.href = "/login";
+      return;
+    }
+    options.headers = { Authorization: `Bearer ${token}`, ...options.headers };
+    return fetch(url, options);
+  };
+
   const handleReact = async (symbol) => {
-    try {
-      const accessToken = sessionStorage.getItem("accessToken");
-      if (!accessToken) {
-        window.location.href = "/login";
-        return;
-      }
-
-      const hasReacted = clickedSymbols.some(
-        (click) => click.symbol === symbol && click.id === id
+    const hasReacted = clickedSymbols.some(
+      (click) => click.symbol === symbol && click.id === id
+    );
+    if (!hasReacted) {
+      const response = await makeRequest(
+        `/social/posts/${id}/react/${encodeURIComponent(symbol)}`,
+        { method: "PUT" }
       );
-
-      if (!hasReacted) {
-        const response = await fetch(
-          `/social/posts/${id}/react/${encodeURIComponent(symbol)}`,
-          {
-            method: "PUT",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
-
-        if (response.ok) {
-          setClickedSymbols((prevSymbols) => [...prevSymbols, { id, symbol }]);
-
-          setReactions((prevReactions) => {
-            const reactionExists = prevReactions.find(
-              (r) => r.symbol === symbol
-            );
-
-            if (reactionExists) {
-              return prevReactions.map((r) =>
-                r.symbol === symbol ? { ...r, count: r.count + 1 } : r
-              );
-            } else {
-              return [...prevReactions, { symbol, count: 1 }];
-            }
-          });
-        } else {
-          console.error("Error reacting to post: Response was not OK.");
-        }
-      }
-    } catch (error) {
-      console.error("Error reacting to post:", error);
+      if (response.ok) updateReactions(symbol);
     }
   };
 
@@ -93,105 +62,63 @@ const PostPage = () => {
     setPickerVisible(false);
   };
 
+  const updateReactions = (symbol) => {
+    setClickedSymbols((prev) => [...prev, { id, symbol }]);
+    const reactionExists = reactions.find((r) => r.symbol === symbol);
+    setReactions((prev) =>
+      reactionExists
+        ? prev.map((r) =>
+            r.symbol === symbol ? { ...r, count: r.count + 1 } : r
+          )
+        : [...prev, { symbol, count: 1 }]
+    );
+  };
+
   const handlePostUpdate = async (updatedPost) => {
-    try {
-      const accessToken = sessionStorage.getItem("accessToken");
-      if (!accessToken) {
-        window.location.href = "/login";
-        return;
-      }
-
-      const response = await fetch(`/social/posts/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify(updatedPost),
-      });
-
-      if (response.ok) {
-        setPost(updatedPost);
-      } else {
-        console.error("Error updating post:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error updating post:", error);
-    }
+    const response = await makeRequest(`/social/posts/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedPost),
+    });
+    if (response.ok) setPost(updatedPost);
   };
 
   const handlePostDelete = async () => {
-    try {
-      const token = sessionStorage.getItem("accessToken");
-
-      const response = await fetch(`/social/posts/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        navigate(-1);
-      } else {
-        console.error("Error deleting post:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error deleting post:", error);
-    }
+    const response = await makeRequest(`/social/posts/${id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) navigate(-1);
   };
 
-  const handleCommentSubmit = async (commentText) => {
-    try {
-      const accessToken = sessionStorage.getItem("accessToken");
-      if (!accessToken) {
-        window.location.href = "/login";
-        return;
-      }
-
-      const response = await fetch(`/social/posts/${id}/comment`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          body: commentText,
-        }),
-      });
-      const data = await response.json();
-      setComments((prevComments) => [...prevComments, data]);
-    } catch (error) {
-      console.error("Error submitting comment:", error);
-    }
+  const handleCommentSubmit = async (text) => {
+    const response = await makeRequest(`/social/posts/${id}/comment`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ body: text }),
+    });
+    const data = await response.json();
+    setComments((prev) => [...prev, data]);
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!post) {
-    return <div>Post not found.</div>;
-  }
-
-  const { title, body, media } = post;
+  if (isLoading) return <div>Loading...</div>;
+  if (!post) return <div>Post not found.</div>;
 
   return (
     <div className="container">
-      <Breadcrumbs title={title} />
+      <Breadcrumbs title={post.title} />
       <div className="card post-card">
         <div className="card-body">
-          <h4 className="card-title">{title}</h4>
+          <h4 className="card-title">{post.title}</h4>
           <h6>
             by{" "}
             <Link to={`/profiles/${post.author.name}`} className="links">
               {post.author.name}
             </Link>
           </h6>
-          {media && (
-            <img src={media} className="card-img-top" alt="Post media" />
+          {post.media && (
+            <img src={post.media} className="card-img-top" alt="Post media" />
           )}
-          <p className="card-description">{body}</p>
+          <p className="card-description">{post.body}</p>
           <div className="post-feedback">
             {sessionStorage.getItem("userProfile") &&
               JSON.parse(sessionStorage.getItem("userProfile")).name ===

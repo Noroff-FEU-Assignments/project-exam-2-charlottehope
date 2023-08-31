@@ -1,13 +1,11 @@
 import React from "react";
 import Navbar from "./Navbar";
 
-const Layout = ({ children, onLogout }) => {
-  return (
-    <div>
-      <Navbar onLogout={onLogout} />
-      {children}
-    </div>
-  );
-};
+const Layout = ({ children, onLogout }) => (
+  <div>
+    <Navbar onLogout={onLogout} />
+    {children}
+  </div>
+);
 
 export default Layout;

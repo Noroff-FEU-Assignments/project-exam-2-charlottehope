@@ -6,14 +6,11 @@ const DeletePost = ({ postId, onDelete }) => {
   const navigate = useNavigate();
 
   const handleDelete = async () => {
+    const token = sessionStorage.getItem("accessToken");
     try {
-      const token = sessionStorage.getItem("accessToken");
-
       const response = await fetch(`/social/posts/${postId}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (response.ok) {
@@ -27,31 +24,28 @@ const DeletePost = ({ postId, onDelete }) => {
     }
   };
 
-  return (
-    <div>
-      {confirming ? (
-        <div className="delete-post">
-          <p>Are you sure you want to delete this post?</p>
-          <button className="btn btn-primary" onClick={handleDelete}>
-            Yes, delete
-          </button>
-          <button
-            className="btn btn-secondary"
-            onClick={() => setConfirming(false)}
-          >
-            Cancel
-          </button>
-        </div>
-      ) : (
-        <button
-          className="btn btn-secondary"
-          onClick={() => setConfirming(true)}
-        >
-          Delete post
-        </button>
-      )}
+  const renderConfirm = () => (
+    <div className="delete-post">
+      <p>Are you sure you want to delete this post?</p>
+      <button className="btn btn-primary" onClick={handleDelete}>
+        Yes, delete
+      </button>
+      <button
+        className="btn btn-secondary"
+        onClick={() => setConfirming(false)}
+      >
+        Cancel
+      </button>
     </div>
   );
+
+  const renderDelete = () => (
+    <button className="btn btn-secondary" onClick={() => setConfirming(true)}>
+      Delete post
+    </button>
+  );
+
+  return <div>{confirming ? renderConfirm() : renderDelete()}</div>;
 };
 
 export default DeletePost;

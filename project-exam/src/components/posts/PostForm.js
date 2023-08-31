@@ -1,67 +1,40 @@
 import React, { useState } from "react";
 
 const PostForm = ({ onPostSubmit }) => {
-  const [newPost, setNewPost] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [title, setTitle] = useState("");
+  const [formData, setFormData] = useState({ title: "", body: "", media: "" });
 
-  const handlePostChange = (e) => {
-    setNewPost(e.target.value);
+  const handleChange = ({ target: { name, value } }) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleImageUrlChange = (e) => {
-    setImageUrl(e.target.value);
-  };
-
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
-
-  const handlePostSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    onPostSubmit(formData);
+    setFormData({ title: "", body: "", media: "" });
+  };
 
-    const post = {
-      title,
-      body: newPost,
-      media: imageUrl,
-    };
-
-    onPostSubmit(post);
-    setNewPost("");
-    setImageUrl("");
-    setTitle("");
+  const placeholders = {
+    title: "Title",
+    body: "Description",
+    media: "Image URL",
   };
 
   return (
     <div className="card post-form">
-      <form onSubmit={handlePostSubmit} className="post-form">
+      <form onSubmit={handleSubmit} className="post-form">
         <h3>Write something...</h3>
-        <div className="form-group">
-          <input
-            type="text"
-            value={title}
-            onChange={handleTitleChange}
-            className="form-control"
-            placeholder="Title"
-          />
-        </div>
-        <div className="form-group">
-          <textarea
-            value={newPost}
-            onChange={handlePostChange}
-            className="form-control"
-            placeholder="Description"
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            value={imageUrl}
-            onChange={handleImageUrlChange}
-            className="form-control"
-            placeholder="Image URL"
-          />
-        </div>
+        {Object.keys(formData).map((field) => (
+          <div className="form-group" key={field}>
+            <input
+              type={field === "body" ? "textarea" : "text"}
+              name={field}
+              value={formData[field]}
+              onChange={handleChange}
+              className="form-control"
+              placeholder={placeholders[field]}
+            />
+          </div>
+        ))}
         <button type="submit" className="btn btn-primary">
           Post
         </button>

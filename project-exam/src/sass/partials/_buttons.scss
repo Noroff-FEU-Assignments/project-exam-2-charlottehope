@@ -1,30 +1,30 @@
 .btn {
   border-radius: 40px;
 }
+
+.btn-primary,
+.btn-secondary {
+  &:hover,
+  &:focus {
+    background-color: #088b96;
+    color: #ffffff;
+  }
+}
+
 .btn-primary {
   --bs-btn-color: #ffffff;
   --bs-btn-active-color: #ffffff;
-
-  &:hover,
-  &:focus {
-    background-color: #088b96;
-    color: #ffffff;
-  }
 }
+
 .btn-secondary {
   color: #003338;
   border: 1px solid #0bc5d5;
-  &:hover,
-  &:focus {
-    background-color: #088b96;
-    color: #ffffff;
-  }
 }
+
 .login-btn {
   width: 100%;
 }
 
-// POST
 .reactions button {
   background-color: #f8feff;
   padding: 1px 10px;
@@ -32,14 +32,14 @@
   border: 1px solid #0bc5d5;
   border-radius: 15px;
 }
+
 .reactions button:disabled {
   background-color: #0bc5d5;
   color: #f8feff;
 }
 
-.edit-button {
-  margin-top: 10px;
-}
+.edit-button,
 .delete-post button {
+  margin-top: 10px;
   margin-right: 5px;
 }

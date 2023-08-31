@@ -37,11 +37,9 @@ const LoginPage = ({ onLogin }) => {
         navigate("/");
       } else {
         const data = await response.json();
-        console.error("Error during login:", data.error || response.statusText);
         setErrorMessage(data.error || "Error during login. Try again.");
       }
     } catch (error) {
-      console.error("Error occurred during login:", error);
       setErrorMessage(`An error occurred during login: ${error.message}`);
     }
   };
@@ -54,7 +52,6 @@ const LoginPage = ({ onLogin }) => {
           alt="konnected logo - Eastern Blue"
           className="card-img-top mx-auto"
         />
-
         <div className="card-body">
           <form onSubmit={handleLogin}>
             <div className="mb-3">
@@ -79,7 +76,7 @@ const LoginPage = ({ onLogin }) => {
             </div>
             {errorMessage && (
               <div className="mb-3 text-danger">{errorMessage}</div>
-            )}{" "}
+            )}
             <button type="submit" className="btn btn-primary login-btn">
               Log in
             </button>

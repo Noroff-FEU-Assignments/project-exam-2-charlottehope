@@ -16,23 +16,17 @@ const App = () => {
 
   useEffect(() => {
     const storedToken = sessionStorage.getItem("accessToken");
-    if (storedToken) {
-      setIsLoggedIn(true);
-    }
+    storedToken && setIsLoggedIn(true);
   }, []);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
+  const handleLogin = () => setIsLoggedIn(true);
   const handleLogout = () => {
     setIsLoggedIn(false);
     sessionStorage.removeItem("accessToken");
   };
 
-  const ProtectedRoute = ({ path, element }) => {
-    return isLoggedIn ? element : <Navigate to="/login" replace={true} />;
-  };
+  const ProtectedRoute = ({ path, element }) =>
+    isLoggedIn ? element : <Navigate to="/login" replace={true} />;
 
   return (
     <div>
