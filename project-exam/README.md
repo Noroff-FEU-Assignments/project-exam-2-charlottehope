@@ -22,7 +22,6 @@ npm install
 
 ```
 npm start
-``
 ```
 
 4. Open the application in your browser (default port 3000):
