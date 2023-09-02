@@ -24,10 +24,6 @@ const App = () => {
     setIsLoggedIn(false);
     sessionStorage.removeItem("accessToken");
   };
-
-  const ProtectedRoute = ({ path, element }) =>
-    isLoggedIn ? element : <Navigate to="/login" replace={true} />;
-
   return (
     <div>
       {isLoggedIn && <Navbar onLogout={handleLogout} />}
@@ -52,19 +48,9 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route
           path="/profile"
-          element={
-            <ProtectedRoute
-              path="/profile"
-              element={<MyProfilePage onLogout={handleLogout} />}
-            />
-          }
+          element={<MyProfilePage onLogout={handleLogout} />}
         />
-        <Route
-          path="/profiles"
-          element={
-            <ProtectedRoute path="/profiles" element={<ProfilesPage />} />
-          }
-        />
+        <Route path="/profiles" element={<ProfilesPage />} />
         <Route path="/profiles/:name" element={<ProfilePage />} />
       </Routes>
     </div>

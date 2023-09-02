@@ -31,9 +31,12 @@ const MyProfilePage = ({ onLogout }) => {
 
   const fetchPosts = async (name) => {
     const token = sessionStorage.getItem("accessToken");
-    const response = await fetch(`/social/profiles/${name}/posts`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `https://api.noroff.dev/api/v1/social/profiles/${name}/posts`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const data = await response.json();
     setPosts(Array.isArray(data) ? data : []);
   };
@@ -48,17 +51,20 @@ const MyProfilePage = ({ onLogout }) => {
     e.preventDefault();
     const token = sessionStorage.getItem("accessToken");
     try {
-      const response = await fetch(`/social/profiles/${profile.name}/media`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          avatar: profile.avatar,
-          banner: profile.banner,
-        }),
-      });
+      const response = await fetch(
+        `https://api.noroff.dev/api/v1/social/profiles/${profile.name}/media`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            avatar: profile.avatar,
+            banner: profile.banner,
+          }),
+        }
+      );
       const responseData = await response.json();
 
       if (response.status === 200) {
@@ -99,6 +105,7 @@ const MyProfilePage = ({ onLogout }) => {
           />
           <h5>{profile.email}</h5>
           <form onSubmit={handleSubmit} className="w-70 profile-photos">
+            <label for="avatar">Avatar Image URL</label>
             <input
               type="text"
               id="avatar"
@@ -109,6 +116,7 @@ const MyProfilePage = ({ onLogout }) => {
               className="form-control mb-3"
               placeholder="Avatar URL"
             />
+            <label for="avatar">Banner Image URL</label>
             <input
               type="text"
               id="banner"

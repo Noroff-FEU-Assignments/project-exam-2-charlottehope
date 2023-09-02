@@ -21,13 +21,16 @@ const LoginPage = ({ onLogin }) => {
     };
 
     try {
-      const response = await fetch("/social/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+      const response = await fetch(
+        "https://api.noroff.dev/api/v1/social/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();

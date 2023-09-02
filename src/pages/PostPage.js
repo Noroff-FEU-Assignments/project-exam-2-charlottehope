@@ -50,7 +50,9 @@ const PostPage = () => {
     );
     if (!hasReacted) {
       const response = await makeRequest(
-        `/social/posts/${id}/react/${encodeURIComponent(symbol)}`,
+        `https://api.noroff.dev/api/v1/social/posts/${id}/react/${encodeURIComponent(
+          symbol
+        )}`,
         { method: "PUT" }
       );
       if (response.ok) updateReactions(symbol);
@@ -75,27 +77,36 @@ const PostPage = () => {
   };
 
   const handlePostUpdate = async (updatedPost) => {
-    const response = await makeRequest(`/social/posts/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedPost),
-    });
+    const response = await makeRequest(
+      `https://api.noroff.dev/api/v1/social/posts/${id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedPost),
+      }
+    );
     if (response.ok) setPost(updatedPost);
   };
 
   const handlePostDelete = async () => {
-    const response = await makeRequest(`/social/posts/${id}`, {
-      method: "DELETE",
-    });
+    const response = await makeRequest(
+      `https://api.noroff.dev/api/v1/social/posts/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
     if (response.ok) navigate(-1);
   };
 
   const handleCommentSubmit = async (text) => {
-    const response = await makeRequest(`/social/posts/${id}/comment`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ body: text }),
-    });
+    const response = await makeRequest(
+      `https://api.noroff.dev/api/v1/social/posts/${id}/comment`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ body: text }),
+      }
+    );
     const data = await response.json();
     setComments((prev) => [...prev, data]);
   };

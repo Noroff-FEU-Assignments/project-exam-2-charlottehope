@@ -9,11 +9,14 @@ const useProfiles = () => {
 
   const checkFollowingStatus = useCallback(async (name) => {
     try {
-      const response = await fetch(`/social/profiles/${name}`, {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
-      });
+      const response = await fetch(
+        `https://api.noroff.dev/api/v1/social/profiles/${name}`,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to check following status");
@@ -34,11 +37,14 @@ const useProfiles = () => {
   const fetchProfiles = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch("/social/profiles", {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
-      });
+      const response = await fetch(
+        "https://api.noroff.dev/api/v1/social/profiles",
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch profiles");
@@ -60,11 +66,14 @@ const useProfiles = () => {
   const fetchProfile = useCallback(async (name) => {
     try {
       setLoading(true);
-      const response = await fetch(`/social/profiles/${name}`, {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
-      });
+      const response = await fetch(
+        `https://api.noroff.dev/api/v1/social/profiles/${name}`,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch profile");
@@ -81,14 +90,17 @@ const useProfiles = () => {
 
   const updateProfileMedia = async (name, avatar, banner) => {
     try {
-      const response = await fetch(`/social/profiles/${name}/media`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
-        body: JSON.stringify({ avatar, banner }),
-      });
+      const response = await fetch(
+        `https://api.noroff.dev/api/v1/social/profiles/${name}/media`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify({ avatar, banner }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to update profile media");
@@ -123,12 +135,15 @@ const useProfiles = () => {
     try {
       const accessToken = sessionStorage.getItem("accessToken");
 
-      const response = await fetch(`/social/profiles/${name}/follow`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await fetch(
+        `https://api.noroff.dev/api/v1/social/profiles/${name}/follow`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
 
       console.log("Response status:", response.status);
 
@@ -152,12 +167,15 @@ const useProfiles = () => {
 
   const unfollowProfile = async (name) => {
     try {
-      const response = await fetch(`/social/profiles/${name}/unfollow`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
-      });
+      const response = await fetch(
+        `https://api.noroff.dev/api/v1/social/profiles/${name}/unfollow`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to unfollow profile");

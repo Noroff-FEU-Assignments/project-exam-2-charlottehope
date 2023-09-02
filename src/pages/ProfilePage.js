@@ -42,9 +42,12 @@ const ProfilePage = () => {
   const fetchPosts = async (profileName) => {
     try {
       const token = sessionStorage.getItem("accessToken");
-      const response = await fetch(`/social/profiles/${profileName}/posts`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await fetch(
+        `https://api.noroff.dev/api/v1/social/profiles/${profileName}/posts`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to fetch posts");
 

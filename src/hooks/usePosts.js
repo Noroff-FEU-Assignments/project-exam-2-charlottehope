@@ -13,11 +13,16 @@ const usePosts = () => {
           const cachedPosts = JSON.parse(localStorage.getItem("cachedPosts"));
           if (cachedPosts) setPosts(cachedPosts);
 
-          const response = await fetch("/social/posts", {
-            headers: {
-              Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-            },
-          });
+          const response = await fetch(
+            "https://api.noroff.dev/api/v1/social/posts",
+            {
+              headers: {
+                Authorization: `Bearer ${sessionStorage.getItem(
+                  "accessToken"
+                )}`,
+              },
+            }
+          );
 
           if (response.ok) {
             const data = await response.json();

@@ -16,7 +16,7 @@ const usePost = (id) => {
         }
 
         const response = await fetch(
-          `/social/posts/${id}?_author=true&_comments=true&_reactions=true`,
+          `https://api.noroff.dev/api/v1/social/posts/${id}?_author=true&_comments=true&_reactions=true`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,

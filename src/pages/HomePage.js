@@ -14,14 +14,17 @@ const HomePage = () => {
 
   const handlePostSubmit = async (newPost) => {
     try {
-      const response = await fetch("/social/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        },
-        body: JSON.stringify(newPost),
-      });
+      const response = await fetch(
+        "https://api.noroff.dev/api/v1/social/posts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify(newPost),
+        }
+      );
       const data = await response.json();
       setPosts([data, ...posts]);
     } catch (error) {

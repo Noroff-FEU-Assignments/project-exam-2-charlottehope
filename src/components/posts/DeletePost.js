@@ -8,10 +8,13 @@ const DeletePost = ({ postId, onDelete }) => {
   const handleDelete = async () => {
     const token = sessionStorage.getItem("accessToken");
     try {
-      const response = await fetch(`/social/posts/${postId}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await fetch(
+        `https://api.noroff.dev/api/v1/social/posts/${postId}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (response.ok) {
         onDelete();
