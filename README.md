@@ -7,7 +7,7 @@
 1. Clone the repo:
 
 ```bash
-   git clone git@github.com:charlottehope/konnected.git
+   git clone git@github.com:Noroff-FEU-Assignments/project-exam-2-charlottehope.git
 ```
 
 2. Install the dependencies:
