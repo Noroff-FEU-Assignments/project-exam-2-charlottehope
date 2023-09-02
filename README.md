@@ -1,4 +1,12 @@
-# Project Exam 2 - Konnected
+# Project Exam 2 Charlotte Hope - Konnected
+
+## This project was built with
+
+- HTML
+- React
+- Bootstrap
+- EmojiMart
+- FortAwesome
 
 ## Getting started
 
@@ -16,29 +24,47 @@
 npm install
 ```
 
+### Running
+
 3. Run the project locally:
 
 ```
-npm start
+npm run start
 ```
 
-4. Open the application in your browser (default port 3000):
-   [http://localhost:3000](http://localhost:3000)
+This opens the application in your browser (default port 3000):
+[http://localhost:3000](http://localhost:3000)
 
-### Log in with test user:
+### Testing
+
+#### Log in with test user:
 
 - Username: charlotte.hope@stud.noroff.no
 - Password: charlotte123
 
-## This project was built with
+## Report
 
-- HTML
-- React
-- Bootstrap
-- EmojiMart
-- FortAwesome
+### Introduction
 
-# Project Exam 2
+This is the biggest project I've done before and it has been fun to learn more as i went on with my planning and development. It has definitely been a rollercoaster ride with both ups and down, but in the end, I am very pleased with the final product.
+
+### Design
+
+I wanted to keep the design as sleek and simple as possible. I think it has a natural glow that the user easily can associate with other social media platforms like Facebook, Instagram, X (Twitter), etc.
+
+### Code
+
+As mentioned in the intrduction, this project has been a rollercoaster. I've had many low lows, and equally many high highs. I've gone from full on mental breakdowns after trying to solve the same problem for hours, only to have an epiphany later the same evening. You can say I've had my fair share of Eureka! moments.
+
+When it comes to the functionality, there are some tweaks i would have worked more with if I had more time. Especially the reactions on posts. I couldn't find a good way to remove the reactions again without messing up the code, and the emoji library is a little wonky. Same goes for the UI on the "Edit post" function.
+
+I couldnt use the last week of my deadline period, due to a personal matter, so I had to deliver the project one week before deadline. If i had more time, I would also cleanup the code even more, and splitting more into separate components.
+
+### Summary
+
+Even though there are a few things that doesn't work as optimal as I had hoped, I am overall very happy with the final result. I'm probably biased, as I've been working with it for such a long time, but from my user testings, I have gotten mostly positive feedback on both the design and the app itself. I therefore feel very pleased with the project delivery.
+
+# Original Project Brief
 
 ## Goal
 
