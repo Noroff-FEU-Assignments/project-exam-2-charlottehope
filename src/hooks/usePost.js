@@ -24,6 +24,7 @@ const usePost = (id) => {
           }
         );
         const data = await response.json();
+        console.log(data);
 
         setPost(data);
         setReactions(data.reactions);
