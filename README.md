@@ -49,9 +49,9 @@ This opens the application in your browser (default port 3000):
 This is a school project, so no contributing is available.
 
 ## Contact
-[My Facebook profile](https://www.facebook.com/charlotte.hope.984)
-[My LinkedIn profile](https://www.linkedin.com/in/charlotte-hope-38b977151/)
-[My Instagram profile](https://www.instagram.com/charlotte.hope93/)
+- [My Facebook profile](https://www.facebook.com/charlotte.hope.984)
+- [My LinkedIn profile](https://www.linkedin.com/in/charlotte-hope-38b977151/)
+- [My Instagram profile](https://www.instagram.com/charlotte.hope93/)
 
 # Project report
 
