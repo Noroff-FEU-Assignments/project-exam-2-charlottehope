@@ -8,6 +8,7 @@ This is my submission for my second year's project exam at Noroff. I'ts a social
 
 - [React.js](https://reactjs.org/)
 - [Bootstrap](https://getbootstrap.com)
+- [Sass](https://sass-lang.com/)
 - [EmojiMart](https://missiveapp.com/open/emoji-mart)
 - [FortAwesome](https://www.npmjs.com/package/@fortawesome/react-fontawesome)
 
