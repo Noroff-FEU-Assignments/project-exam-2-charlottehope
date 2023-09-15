@@ -1,12 +1,15 @@
 # Project Exam 2 Charlotte Hope - Konnected
+<img width="1728" alt="konnected1" src="https://github.com/Noroff-FEU-Assignments/project-exam-2-charlottehope/assets/65370439/f063b56a-0ca7-4f18-a71b-843d5819cf8b">
 
-## This project was built with
+## Description
+This is my submission for my second year's project exam at Noroff. I'ts a social media platform called Konnected, that lets the user write posts, as well as follow other user, comment and react on their posts, etc.
 
-- HTML
-- React
-- Bootstrap
-- EmojiMart
-- FortAwesome
+## Built with
+
+- [React.js](https://reactjs.org/)
+- [Bootstrap](https://getbootstrap.com)
+- [EmojiMart] (https://missiveapp.com/open/emoji-mart)
+- [FortAwesome] (https://www.npmjs.com/package/@fortawesome/react-fontawesome)
 
 ## Getting started
 
@@ -42,17 +45,25 @@ This opens the application in your browser (default port 3000):
 - Username: charlotte.hope@stud.noroff.no
 - Password: charlotte123
 
-## Report
+## Contributing
+This is a school project, so no contributing is available.
 
-### Introduction
+## Contact
+[My Facebook profile] (https://www.facebook.com/charlotte.hope.984)
+[My LinkedIn profile] (https://www.linkedin.com/in/charlotte-hope-38b977151/)
+[My Instagram profile] (https://www.instagram.com/charlotte.hope93/)
+
+# Project report
+
+## Introduction
 
 This is the biggest project I've done before and it has been fun to learn more as i went on with my planning and development. It has definitely been a rollercoaster ride with both ups and down, but in the end, I am very pleased with the final product.
 
-### Design
+## Design
 
 I wanted to keep the design as sleek and simple as possible. I think it has a natural glow that the user easily can associate with other social media platforms like Facebook, Instagram, X (Twitter), etc.
 
-### Code
+## Code
 
 As mentioned in the intrduction, this project has been a rollercoaster. I've had many low lows, and equally many high highs. I've gone from full on mental breakdowns after trying to solve the same problem for hours, only to have an epiphany later the same evening. You can say I've had my fair share of Eureka! moments.
 
@@ -60,7 +71,7 @@ When it comes to the functionality, there are some tweaks i would have worked mo
 
 I couldnt use the last week of my deadline period, due to a personal matter, so I had to deliver the project one week before deadline. If i had more time, I would also cleanup the code even more, and splitting more into separate components.
 
-### Summary
+## Summary
 
 Even though there are a few things that doesn't work as optimal as I had hoped, I am overall very happy with the final result. I'm probably biased, as I've been working with it for such a long time, but from my user testings, I have gotten mostly positive feedback on both the design and the app itself. I therefore feel very pleased with the project delivery.
 
