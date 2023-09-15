@@ -1,5 +1,24 @@
 # Project Exam 2 Charlotte Hope - Konnected
+#### Post
 <img width="1728" alt="konnected1" src="https://github.com/Noroff-FEU-Assignments/project-exam-2-charlottehope/assets/65370439/f063b56a-0ca7-4f18-a71b-843d5819cf8b">
+
+#### Feed
+<img width="1728" alt="konnected2" src="https://github.com/charlottehope/konnected/assets/65370439/eb326e5c-5a51-435f-a476-1212deabe319">
+
+#### My profile
+<img width="1728" alt="konnected3" src="https://github.com/charlottehope/konnected/assets/65370439/6677eb87-83fd-4c49-a7cb-126728464123">
+
+#### Profiles
+<img width="1728" alt="konnected4" src="https://github.com/charlottehope/konnected/assets/65370439/e7214bac-39ce-4ab4-8e24-8e8ec52f8f7c">
+
+#### Profile
+<img width="1728" alt="konnected5" src="https://github.com/charlottehope/konnected/assets/65370439/98343afe-7f7c-4d31-8c9c-40e0da925310">
+
+#### Login
+<img width="1728" alt="konnected6" src="https://github.com/charlottehope/konnected/assets/65370439/b305a052-00fa-4c3e-bc27-9dbccefd5438">
+
+#### Signup
+<img width="1728" alt="konnected7" src="https://github.com/charlottehope/konnected/assets/65370439/94f32ca6-396c-400c-a654-5a2ef00d5e3f">
 
 ## Description
 This is my submission for my second year's project exam at Noroff. I'ts a social media platform called Konnected, that lets the user write posts, as well as follow other user, comment and react on their posts, etc.
